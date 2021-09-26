@@ -1,0 +1,116 @@
+# ----------------------------------------------------------------------------
+# Copyright (c) 2021, Diego Garcia Huerta.
+#
+# Your use of this software as distributed in this GitHub repository, is
+# governed by the MIT License
+#
+# Your use of the Shotgun Pipeline Toolkit is governed by the applicable
+# license agreement between you and Autodesk / Shotgun.
+#
+# The full license is in the file LICENSE, distributed with this software.
+# ----------------------------------------------------------------------------
+
+
+# Author: Diego Garcia Huerta
+# Contact: https://www.linkedin.com/in/diegogh/
+#
+# YOU SHOULD MERGE these entries into your settings file, as
+# THIS FILE BY ITSELF WILL NOT WORK
+# These are the additions to get the engine up and running with the
+# default tk-apps for this environment
+
+publish_help_url: &help_url "https://support.shotgunsoftware.com/hc/en-us/articles/115000068574-Integrations-User-Guide#The%20Publisher"
+
+#  --- Gaffer
+
+# asset step
+settings.tk-multi-publish2.gaffer.asset_step:
+  collector: "{self}/collector.py:{engine}/tk-multi-publish2/basic/collector.py"
+  collector_settings:
+      Work Template: gaffer_asset_work
+  publish_plugins:
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py"
+    settings: {}
+  - name: Upload for review
+    hook: "{self}/upload_version.py"
+    settings: {}
+  - name: Begin file versioning
+    hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
+    settings: {}
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
+    settings:
+        Publish Template: gaffer_asset_publish
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_image_writer.py"
+    settings:
+        Publish Template: gaffer_asset_image_publish
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_scene_writer.py"
+    settings:
+        Publish Template: gaffer_asset_scene_publish
+  help_url: *help_url
+  location: "@apps.tk-multi-publish2.location"
+
+
+# sequence step
+settings.tk-multi-publish2.gaffer.sequence_step:
+  collector: "{self}/collector.py:{engine}/tk-multi-publish2/basic/collector.py"
+  collector_settings:
+      Work Template: gaffer_sequence_work
+  publish_plugins:
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py"
+    settings: {}
+  - name: Upload for review
+    hook: "{self}/upload_version.py"
+    settings: {}
+  - name: Begin file versioning
+    hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
+    settings: {}
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
+    settings:
+        Publish Template: gaffer_sequence_publish
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_image_writer.py"
+    settings:
+        Publish Template: gaffer_sequence_image_publish
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_scene_writer.py"
+    settings:
+        Publish Template: gaffer_sequence_scene_publish
+  help_url: *help_url
+  location: "@apps.tk-multi-publish2.location"
+
+
+# shot step
+settings.tk-multi-publish2.gaffer.shot_step:
+  collector: "{self}/collector.py:{engine}/tk-multi-publish2/basic/collector.py"
+  collector_settings:
+      Work Template: gaffer_shot_work
+  publish_plugins:
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py"
+    settings: {}
+  - name: Upload for review
+    hook: "{self}/upload_version.py"
+    settings: {}
+  - name: Begin file versioning
+    hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
+    settings: {}
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
+    settings:
+        Publish Template: gaffer_shot_publish
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_image_writer.py"
+    settings:
+        Publish Template: gaffer_shot_image_publish
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_scene_writer.py"
+    settings:
+        Publish Template: gaffer_shot_scene_publish
+  help_url: *help_url
+  location: "@apps.tk-multi-publish2.location"
